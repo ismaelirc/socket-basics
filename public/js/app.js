@@ -1,9 +1,15 @@
 var socket = io();
 var name = getQueryVariable('name') || 'Anonymous';
-var room = getQueryVariable('room');
+var room = getQueryVariable('room') || 'General';
+
+$(".room-title").html(room);
 
 socket.on('connect',function(){
 	console.log('User connect to the room!');
+	socket.emit('joinRoom',{
+		name:name,
+		room: room
+	});
 
 });
 
